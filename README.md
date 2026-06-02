@@ -1,5 +1,5 @@
 # Angular-Product-Explorer
-Product Explorer is a responsive Angular SPA for browsing, searching, filtering and adding products to favorites. It uses Angular, TypeScript, RxJS, and SCSS with a scalable feature-based, lazy-loaded architecture, an admin route guard, mobile-first design and tests with Jasmine/Karma and Playwright
+Product Explorer is a responsive Angular SPA for browsing, searching, filtering and adding products to favorites. It uses Angular, TypeScript, RxJS, and SCSS with a scalable feature-based, lazy-loaded architecture, an admin route guard, mobile-first design and tests with Vitest and Playwright
 
 # Product Explorer
 
@@ -22,7 +22,7 @@ A responsive Angular Single Page Application (SPA) that allows users to browse, 
 * RxJS
 * SCSS
 * Angular Router
-* Jasmine/Karma (Unit Testing)
+* Vitest (Unit Testing)
 * Playwright (Functional/E2E Testing)
 
 ## Architecture
