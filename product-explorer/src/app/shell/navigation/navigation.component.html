@@ -1,0 +1,16 @@
+<nav class="app-nav" aria-label="Primary">
+  <ul class="nav-list">
+    @for (item of navItems; track item.path) {
+      <li>
+        <a
+          class="nav-link"
+          [routerLink]="item.path"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+        >
+          {{ item.label }}
+        </a>
+      </li>
+    }
+  </ul>
+</nav>

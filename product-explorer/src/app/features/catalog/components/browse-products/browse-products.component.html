@@ -1,0 +1,81 @@
+<section class="feature-page" aria-labelledby="catalog-heading">
+  <header class="catalog-header">
+    <div class="title-wrap">
+      <h1 id="catalog-heading">Catalog</h1>
+      <p class="subtext">Find products quickly using search, category filters and sorting options</p>
+    </div>
+  </header>
+
+  <form class="controls" aria-label="Catalog filters" (submit)="$event.preventDefault()">
+    <div class="control-card">
+      <label class="field">
+        Search
+        <input
+          type="search"
+          placeholder="Search by name, category, or description"
+        />
+      </label>
+
+      <label class="field">
+        Category
+        <select>
+          <option value="all">All categories</option>
+          @for (category of state.categories(); track category) {
+            <option [value]="category">{{ category }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="field">
+        Sort
+        <select>
+          <option value="relevance">Relevance</option>
+          <option value="name-asc">Name (A-Z)</option>
+          <option value="price-asc">Price (Low to High)</option>
+          <option value="price-desc">Price (High to Low)</option>
+        </select>
+      </label>
+
+      <label class="checkbox-field">
+        <input type="checkbox" />
+        In stock only
+      </label>
+    </div>
+  </form>
+
+  @if (state.loading()) {
+    <p class="status loading">Loading catalog...</p>
+  } @else if (state.error(); as error) {
+    <div class="status error" role="alert">
+      <p>{{ error }}</p>
+      <button type="button" (click)="retry()">Retry</button>
+    </div>
+  } @else if (visibleProducts().length === 0) {
+    <p class="status">No products match your current filters.</p>
+  } @else {
+    <ul class="product-grid" aria-label="Product results">
+      @for (product of visibleProducts(); track product.id) {
+        <li class="card">
+          <div>
+            <h2>{{ product.name }}</h2>
+          </div>
+
+          <div class="product-image-wrap">
+            <img class="product-image" src="/assets/lexisNexis.svg" alt="LexisNexis logo" />
+          </div>
+
+          <dl class="meta">
+            <div>
+              <dt>Price</dt>
+              <dd>R{{ product.price | number:'1.2-2' }}</dd>
+            </div>
+          </dl>
+
+          <button type="button" class="favorite-btn">
+            View
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</section>
