@@ -1,0 +1,54 @@
+<section class="details-page" aria-labelledby="product-details-heading">
+  <a class="back-link" [routerLink]="['/catalog']">Back to catalog</a>
+
+  @if (loading()) {
+    <p class="status loading">Loading product details...</p>
+  } @else if (error(); as errorMessage) {
+    <div class="status error" role="alert">
+      <p>{{ errorMessage }}</p>
+      <a [routerLink]="['/catalog']">Return to catalog</a>
+    </div>
+  } @else if (product(); as selectedProduct) {
+    <header class="details-header">
+      <h1 id="product-details-heading">{{ selectedProduct.name }}</h1>
+      <p>{{ selectedProduct.description }}</p>
+    </header>
+
+    <div class="details-card">
+      <div class="details-card-top">
+        <button type="button" class="pin-btn">
+          <span class="pin-icon" aria-hidden="true">&#128204;</span>
+          <span>Pin</span>
+        </button>
+      </div>
+
+      <div class="image-wrap">
+        <img class="product-image" src="/assets/lexisNexis.svg" alt="LexisNexis logo" />
+      </div>
+
+      <dl class="meta">
+        <div>
+          <dt>Category</dt>
+          <dd>{{ selectedProduct.category }}</dd>
+        </div>
+        <div>
+          <dt>Price</dt>
+          <dd>R{{ selectedProduct.price | number:'1.2-2' }}</dd>
+        </div>
+        <div>
+          <dt>Rating</dt>
+          <dd>{{ selectedProduct.rating }}</dd>
+        </div>
+        <div>
+          <dt>Stock</dt>
+          <dd>{{ selectedProduct.inStock ? 'In stock' : 'Out of stock' }}</dd>
+        </div>
+      </dl>
+    </div>
+  } @else {
+    <div class="status error" role="alert">
+      <p>Product not found.</p>
+      <a [routerLink]="['/catalog']">Return to catalog</a>
+    </div>
+  }
+</section>

@@ -1,0 +1,149 @@
+:host {
+  --ink-900: #12223a;
+  --ink-700: #304a69;
+  --line: #ccd8e7;
+  --surface: #ffffff;
+  --surface-soft: #f4f8fd;
+  --danger-soft: #fff1f1;
+}
+
+.details-page {
+  display: grid;
+  gap: 1rem;
+  background:
+    radial-gradient(circle at 5% 0%, #f7fbff 0%, transparent 38%),
+    radial-gradient(circle at 95% 5%, #ecf5ff 0%, transparent 42%),
+    var(--surface);
+}
+
+.back-link {
+  width: fit-content;
+  color: #1f6fdd;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.details-header {
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  padding: 0.9rem;
+  text-align: center;
+  width: min(38rem, 100%);
+  justify-self: center;
+}
+
+.details-header h1 {
+  margin: 0;
+}
+
+.details-header p {
+  margin: 0.45rem 0 0;
+  color: var(--ink-700);
+}
+
+.details-card {
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  padding: 0.9rem;
+  background: var(--surface);
+  box-shadow: 0 8px 20px -14px rgba(21, 46, 78, 0.35);
+  display: grid;
+  gap: 1rem;
+  width: min(38rem, 100%);
+  justify-self: center;
+  margin-bottom: 1rem;
+}
+
+.details-card-top {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid #b8c9dd;
+  border-radius: 999px;
+  background: #f8fbff;
+  color: #23486f;
+  padding: 0.28rem 0.7rem;
+  font-weight: 600;
+}
+
+.pin-icon {
+  line-height: 1;
+}
+
+.pin-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.image-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 7rem;
+  padding: 0.4rem;
+  border: 1px solid #d8e2ef;
+  border-radius: 0.55rem;
+  background: #f9fcff;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 10rem;
+  height: auto;
+  object-fit: contain;
+}
+
+.meta {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.meta div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.meta dt {
+  font-size: 0.78rem;
+  color: var(--ink-700);
+}
+
+.meta dd {
+  margin: 0;
+  color: var(--ink-900);
+  font-weight: 700;
+}
+
+.status {
+  margin: 0;
+  border-radius: 0.55rem;
+  padding: 0.75rem;
+}
+
+.status.loading {
+  background: #e7f0ff;
+  border: 1px solid #c5daff;
+}
+
+.status.error {
+  border: 1px solid #e0a7a9;
+  background: var(--danger-soft);
+}
+
+@media (max-width: 36rem) {
+  .meta {
+    grid-template-columns: 1fr;
+  }
+}

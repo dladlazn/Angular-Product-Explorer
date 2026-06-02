@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { CatalogFacade } from '../../services/catalog.facade';
 
 @Component({
   selector: 'app-browse-products',
   standalone: true,
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, RouterLink],
   templateUrl: './browse-products.component.html',
   styleUrl: './browse-products.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

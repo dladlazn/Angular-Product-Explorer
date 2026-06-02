@@ -1,7 +1,6 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { finalize } from 'rxjs/operators';
-import { ProductsApi } from '../../../core/api/products.api';
 import { CatalogFilters, Product, ProductCategory, ProductSort } from '../models/product.model';
+import { ProductStoreService } from '../../../shared/services/product-store.service';
 
 const DEFAULT_FILTERS: CatalogFilters = {
   query: '',
@@ -12,23 +11,19 @@ const DEFAULT_FILTERS: CatalogFilters = {
 
 @Injectable({ providedIn: 'root' })
 export class CatalogFacade {
-  private readonly allProductsState = signal<readonly Product[]>([]);
   private readonly filtersState = signal<CatalogFilters>(DEFAULT_FILTERS);
-  private readonly loadingState = signal<boolean>(false);
-  private readonly errorState = signal<string | null>(null);
-
-  public readonly allProducts = this.allProductsState.asReadonly();
   public readonly filters = this.filtersState.asReadonly();
-  public readonly loading = this.loadingState.asReadonly();
-  public readonly error = this.errorState.asReadonly();
+  public readonly allProducts = computed(() => this.productStore.products());
+  public readonly loading = computed(() => this.productStore.loading());
+  public readonly error = computed(() => this.productStore.error());
 
   public readonly categories = computed<readonly ProductCategory[]>(() => {
-    const all = this.allProductsState();
+    const all = this.productStore.products();
     return Array.from(new Set(all.map((product) => product.category))).sort();
   });
 
   public readonly visibleProducts = computed<readonly Product[]>(() => {
-    const products = this.allProductsState();
+    const products = this.productStore.products();
     const filters = this.filtersState();
     const query = filters.query.trim().toLowerCase();
 
@@ -52,33 +47,14 @@ export class CatalogFacade {
     return this.sortProducts(filtered, filters.sort);
   });
 
-  public constructor(private readonly productsApi: ProductsApi) {}
+  public constructor(private readonly productStore: ProductStoreService) {}
 
   public ensureLoaded(): void {
-    if (this.allProductsState().length > 0 || this.loadingState()) {
-      return;
-    }
-
-    this.loadProducts();
+    this.productStore.ensureLoaded();
   }
 
   public loadProducts(forceError = false): void {
-    this.loadingState.set(true);
-    this.errorState.set(null);
-
-    this.productsApi
-      .getProducts(forceError)
-      .pipe(finalize(() => this.loadingState.set(false)))
-      .subscribe({
-        next: (products) => {
-          this.allProductsState.set(products);
-          this.errorState.set(null);
-        },
-        error: (error: unknown) => {
-          const message = error instanceof Error ? error.message : 'An unexpected error occurred.';
-          this.errorState.set(message);
-        }
-      });
+    this.productStore.loadProducts(forceError);
   }
 
   public setQuery(query: string): void {
@@ -98,11 +74,7 @@ export class CatalogFacade {
   }
 
   public getProductById(productId: string | null): Product | null {
-    if (!productId) {
-      return null;
-    }
-
-    return this.allProductsState().find((product) => product.id === productId) ?? null;
+    return this.productStore.getProductById(productId);
   }
 
   private patchFilters(partial: Partial<CatalogFilters>): void {
