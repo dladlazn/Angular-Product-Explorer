@@ -1,0 +1,150 @@
+:host {
+  --ink-900: #12223a;
+  --ink-700: #304a69;
+  --line: #ccd8e7;
+  --surface: #ffffff;
+  --surface-soft: #f4f8fd;
+}
+
+.favorites-page {
+  display: grid;
+  gap: 1rem;
+  background:
+    radial-gradient(circle at 4% 3%, #f4fbff 0%, transparent 36%),
+    radial-gradient(circle at 98% 2%, #e9f3ff 0%, transparent 42%),
+    var(--surface);
+}
+
+.favorites-header {
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: var(--surface-soft);
+  padding: 0.9rem;
+  text-align: center;
+}
+
+.favorites-header h1 {
+  margin: 0;
+}
+
+.favorites-header p {
+  margin: 0.4rem 0 0;
+  color: var(--ink-700);
+}
+
+.favorites-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.9rem;
+}
+
+.favorite-card {
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  padding: 0.9rem;
+  display: grid;
+  gap: 0.7rem;
+  background: var(--surface);
+  box-shadow: 0 8px 22px -14px rgba(17, 46, 80, 0.36);
+  margin-bottom: 1rem;
+}
+
+.image-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 6.5rem;
+  padding: 0.4rem;
+  border: 1px solid #d8e2ef;
+  border-radius: 0.55rem;
+  background: #f9fcff;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 8rem;
+  height: auto;
+  object-fit: contain;
+}
+
+.favorite-card h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  text-align: center;
+}
+
+.favorite-card p {
+  margin: 0;
+  color: var(--ink-700);
+}
+
+.meta {
+  margin: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.meta div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.meta dt {
+  color: var(--ink-700);
+}
+
+.meta dd {
+  margin: 0;
+  color: var(--ink-900);
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.view-link,
+.remove-btn {
+  border: 1px solid #b8c9dd;
+  border-radius: 999px;
+  padding: 0.28rem 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.view-link {
+  background: #f7fbff;
+  color: #214a73;
+}
+
+.remove-btn {
+  background: #fff4f4;
+  color: #8f2c2f;
+}
+
+.status {
+  margin: 0;
+  border-radius: 0.6rem;
+  border: 1px solid var(--line);
+  padding: 0.75rem;
+}
+
+.status.loading {
+  background: #e7f0ff;
+  border-color: #c5daff;
+}
+
+.status.error {
+  background: #fff1f1;
+  border-color: #e0a7a9;
+}
+
+.status.empty {
+  background: #f5f9ff;
+}

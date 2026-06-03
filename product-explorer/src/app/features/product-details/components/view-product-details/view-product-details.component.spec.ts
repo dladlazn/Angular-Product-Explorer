@@ -48,11 +48,11 @@ describe('ViewProductDetailsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('requests shared products on init', () => {
+  it('calls ensureLoaded during initialization', () => {
     expect(mockProductStore.ensureLoaded).toHaveBeenCalled();
   });
 
-  it('renders the selected product details', () => {
+  it('loads products when component initializes', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('Wireless Mouse');
     expect(compiled.textContent).toContain('Ergonomic wireless mouse with USB-C charging.');

@@ -16,9 +16,9 @@
 
     <div class="details-card">
       <div class="details-card-top">
-        <button type="button" class="pin-btn">
+        <button type="button" class="pin-btn" [disabled]="isPinned()" (click)="pinCurrentProduct()">
           <span class="pin-icon" aria-hidden="true">&#128204;</span>
-          <span>Pin</span>
+          <span>{{ isPinned() ? 'Pinned' : 'Pin' }}</span>
         </button>
       </div>
 

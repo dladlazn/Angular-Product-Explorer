@@ -1,0 +1,52 @@
+<section class="favorites-page" aria-labelledby="favorites-heading">
+  <header class="favorites-header">
+    <h1 id="favorites-heading">Favorites</h1>
+    <p>Pinned products</p>
+  </header>
+
+  @if (loading()) {
+    <p class="status loading">Loading favorites...</p>
+  } @else if (error(); as errorMessage) {
+    <div class="status error" role="alert">
+      <p>{{ errorMessage }}</p>
+      <a [routerLink]="['/catalog']">Return to catalog</a>
+    </div>
+  } @else if (favoriteProducts().length === 0) {
+    <div class="status empty">
+      <p>You do not have any pinned products yet.</p>
+      <a [routerLink]="['/catalog']">Browse catalog</a>
+    </div>
+  } @else {
+    <ul class="favorites-list">
+      @for (product of favoriteProducts(); track product.id) {
+        <li class="favorite-card">
+          <h2>{{ product.name }}</h2>
+
+          <div class="image-wrap">
+            <img class="product-image" src="/assets/lexisNexis.svg" alt="LexisNexis logo" />
+          </div>
+
+          <p>{{ product.description }}</p>
+
+          <dl class="meta">
+            <div>
+              <dt>Category</dt>
+              <dd>{{ product.category }}</dd>
+            </div>
+            <div>
+              <dt>Price</dt>
+              <dd>R{{ product.price | number:'1.2-2' }}</dd>
+            </div>
+          </dl>
+
+          <div class="actions">
+            <a class="view-link" [routerLink]="['/products', product.id]">View</a>
+            <button type="button" class="remove-btn" (click)="removeFavorite(product.id)">
+              Remove
+            </button>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</section>

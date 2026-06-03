@@ -11,6 +11,32 @@ export class FavoritesService {
     return this.favoriteIdsState().has(productId);
   }
 
+  public add(productId: string): void {
+    this.favoriteIdsState.update((ids) => {
+      if (ids.has(productId)) {
+        return ids;
+      }
+
+      const next = new Set(ids);
+      next.add(productId);
+      this.saveToStorage(next);
+      return next;
+    });
+  }
+
+  public remove(productId: string): void {
+    this.favoriteIdsState.update((ids) => {
+      if (!ids.has(productId)) {
+        return ids;
+      }
+
+      const next = new Set(ids);
+      next.delete(productId);
+      this.saveToStorage(next);
+      return next;
+    });
+  }
+
   public toggle(productId: string): void {
     this.favoriteIdsState.update((ids) => {
       const next = new Set(ids);
