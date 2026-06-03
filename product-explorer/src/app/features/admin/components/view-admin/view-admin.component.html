@@ -1,0 +1,42 @@
+<section class="admin-page" aria-labelledby="admin-heading">
+  <header class="admin-header">
+    <h1 id="admin-heading">Admin</h1>
+    <p>Manage application-level controls used for internal tooling and diagnostics.</p>
+  </header>
+
+  <div class="admin-grid">
+    <article class="admin-card">
+      <h2>Catalog Diagnostics</h2>
+      <p>
+        Force the catalog API simulation to fail so loading/error states can be validated quickly.
+      </p>
+      <div class="diagnostics-actions">
+        <button type="button" class="action-btn" (click)="toggleCatalogErrorSimulation()">
+          {{ forceCatalogErrorEnabled() ? 'Unblock catalog API access' : 'Block catalog API access' }}
+        </button>
+        <span class="state-chip" [class.active]="forceCatalogErrorEnabled()">
+          Status: {{ forceCatalogErrorEnabled() ? 'Blocked' : 'Allowed' }}
+        </span>
+      </div>
+    </article>
+
+    <article class="admin-card">
+      <h2>Favorites Maintenance</h2>
+      <p>Current favorites count: <strong>{{ favoriteCount() }}</strong></p>
+      <button type="button" class="action-btn" (click)="clearFavorites()">
+        Clear all favorites
+      </button>
+    </article>
+
+    <article class="admin-card">
+      <h2>Access Control</h2>
+      <p>
+        Revoke your admin access flag and return to catalog. You will be blocked from reopening admin
+        until access is granted again.
+      </p>
+      <button type="button" class="danger-btn" (click)="revokeAdminAccess()">
+        Revoke admin access
+      </button>
+    </article>
+  </div>
+</section>

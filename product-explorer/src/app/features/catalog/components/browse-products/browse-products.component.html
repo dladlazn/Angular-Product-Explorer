@@ -6,6 +6,13 @@
     </div>
   </header>
 
+  @if (adminAccessDenied()) {
+    <div class="status error" role="alert">
+      <p>Admin access is currently disabled for this browser session.</p>
+      <button type="button" (click)="grantAdminAccess()">Grant admin access</button>
+    </div>
+  }
+
   <form class="controls" aria-label="Catalog filters" (submit)="$event.preventDefault()">
     <div class="control-card">
       <label class="field">

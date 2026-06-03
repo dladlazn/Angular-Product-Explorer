@@ -1,6 +1,7 @@
 export const APP_STORAGE_KEYS = {
   favorites: 'productExplorer.favorites',
-  forceCatalogError: 'productExplorer.forceCatalogError'
+  forceCatalogError: 'productExplorer.forceCatalogError',
+  isAdmin: 'productExplorer.isAdmin'
 } as const;
 
 export const API_SIMULATION = {

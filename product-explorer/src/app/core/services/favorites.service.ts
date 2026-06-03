@@ -37,6 +37,12 @@ export class FavoritesService {
     });
   }
 
+  public clear(): void {
+    const next = new Set<string>();
+    this.favoriteIdsState.set(next);
+    this.saveToStorage(next);
+  }
+
   public toggle(productId: string): void {
     this.favoriteIdsState.update((ids) => {
       const next = new Set(ids);

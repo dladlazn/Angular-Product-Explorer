@@ -1,0 +1,123 @@
+:host {
+  --ink-900: #12223a;
+  --ink-700: #304a69;
+  --line: #ccd8e7;
+  --surface: #ffffff;
+  --surface-soft: #f4f8fd;
+}
+
+.admin-page {
+  display: grid;
+  gap: 1rem;
+  background:
+    radial-gradient(circle at 8% 0%, #f6fbff 0%, transparent 38%),
+    radial-gradient(circle at 94% 6%, #eef7ff 0%, transparent 44%),
+    var(--surface);
+}
+
+.admin-header {
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: var(--surface-soft);
+  padding: 0.9rem;
+  text-align: center;
+}
+
+.admin-header h1 {
+  margin: 0;
+}
+
+.admin-header p {
+  margin: 0.4rem 0 0;
+  color: var(--ink-700);
+}
+
+.admin-grid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.admin-card {
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  background: var(--surface);
+  padding: 0.9rem;
+  box-shadow: 0 8px 22px -14px rgba(17, 46, 80, 0.36);
+  display: grid;
+  gap: 0.7rem;
+  margin-bottom: 1.3rem;
+}
+
+.admin-card h2 {
+  margin: 0;
+  font-size: 1.02rem;
+  text-align: center;
+}
+
+.admin-card p {
+  margin: 0;
+  color: var(--ink-700);
+  text-align: center;
+}
+
+.diagnostics-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.action-btn,
+.danger-btn {
+  border-radius: 999px;
+  border: 1px solid #b8c9dd;
+  padding: 0.34rem 0.82rem;
+  font-weight: 600;
+  width: fit-content;
+  justify-self: center;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+}
+
+.action-btn {
+  background: #f7fbff;
+  color: #214a73;
+}
+
+.danger-btn {
+  background: #fff4f4;
+  color: #8f2c2f;
+}
+
+.action-btn:hover,
+.danger-btn:hover {
+  filter: brightness(0.98);
+  box-shadow: 0 6px 14px -10px rgba(17, 46, 80, 0.6);
+}
+
+.action-btn:active,
+.danger-btn:active {
+  transform: translateY(1px);
+}
+
+.action-btn:focus-visible,
+.danger-btn:focus-visible {
+  outline: 2px solid #2f77d5;
+  outline-offset: 2px;
+}
+
+.state-chip {
+  border: 1px solid #c8d8eb;
+  border-radius: 0.35rem;
+  background: #f6faff;
+  padding: 0.35rem 0.62rem;
+  width: fit-content;
+  color: var(--ink-900);
+  margin-left: auto;
+}
+
+.state-chip.active {
+  border-color: #99c3fa;
+  background: #e9f3ff;
+}
