@@ -13,12 +13,14 @@
         <input
           type="search"
           placeholder="Search by name, category, or description"
+          [value]="filters().query"
+          (input)="onQueryInput($event)"
         />
       </label>
 
       <label class="field">
         Category
-        <select>
+        <select [value]="filters().category" (change)="onCategoryChange($event)">
           <option value="all">All categories</option>
           @for (category of state.categories(); track category) {
             <option [value]="category">{{ category }}</option>
@@ -28,7 +30,7 @@
 
       <label class="field">
         Sort
-        <select>
+        <select [value]="filters().sort" (change)="onSortChange($event)">
           <option value="relevance">Relevance</option>
           <option value="name-asc">Name (A-Z)</option>
           <option value="price-asc">Price (Low to High)</option>
@@ -37,7 +39,11 @@
       </label>
 
       <label class="checkbox-field">
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          [checked]="filters().showInStockOnly"
+          (change)="onInStockOnlyChange($event)"
+        />
         In stock only
       </label>
     </div>

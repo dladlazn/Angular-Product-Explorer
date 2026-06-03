@@ -40,8 +40,8 @@ export class CatalogFacade {
         return true;
       }
 
-      const searchable = `${product.name} ${product.description} ${product.category}`.toLowerCase();
-      return searchable.includes(query);
+      const name = product.name.toLowerCase();
+      return name.startsWith(query);
     });
 
     return this.sortProducts(filtered, filters.sort);

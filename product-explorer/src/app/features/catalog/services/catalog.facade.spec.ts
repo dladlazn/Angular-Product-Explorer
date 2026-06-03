@@ -49,4 +49,13 @@ describe('CatalogFacade', () => {
   it('returns all products by default', () => {
     expect(facade.visibleProducts().length).toBe(2);
   });
+
+  it('filters products by category', () => {
+    facade.setCategory('Audio');
+
+    const visible = facade.visibleProducts();
+
+    expect(visible.length).toBe(1);
+    expect(visible[0]?.id).toBe('p-2');
+  });
 });
