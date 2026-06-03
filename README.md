@@ -1,143 +1,147 @@
-# Angular-Product-Explorer
-Product Explorer is a responsive Angular SPA for browsing, searching, filtering and adding products to favorites. It uses Angular, TypeScript, RxJS, and SCSS with a scalable feature-based, lazy-loaded architecture, an admin route guard, mobile-first design and tests with Vitest and Playwright
+# Angular Product Explorer
 
-# Product Explorer
+Product Explorer is a responsive Angular SPA for browsing products, applying catalog filters, viewing product details, managing favorites, and accessing a guarded admin feature.
 
-A responsive Angular Single Page Application (SPA) that allows users to browse, search, filter and add products to favorites. The application demonstrates modern Angular development practices, strong TypeScript usage, responsive design, testing and a scalable architecture designed with micro-frontend readiness in mind.
+## Implemented Features
 
-## Features
+- Standalone Angular bootstrapping and standalone components
+- Lazy-loaded feature routes for Catalog, Product Details, Favorites, and Admin
+- Catalog search, category filtering, sort options, and in-stock-only filtering
+- Product details page with Pin-to-favorites behavior
+- Favorites persistence with localStorage
+- Guarded Admin route with diagnostics and maintenance actions
+- Loading, empty, and error states using modern Angular template control flow
 
-* Browse a product catalog
-* Search products by name
-* Filter products by category
-* View detailed product information
-* Add products to favorites
-* Responsive mobile-first design
-* Protected Admin route using a route guard
+## Tech Stack
 
-## Technology Stack
+- Angular 21
+- TypeScript (strict typing with explicit models)
+- RxJS
+- Angular Signals
+- SCSS
+- Vitest via `ng test`
 
-* Angular
-* TypeScript
-* RxJS
-* SCSS
-* Angular Router
-* Vitest (Unit Testing)
-* Playwright (Functional/E2E Testing)
+## Run Locally
 
-## Architecture
-
-The application follows a feature-based architecture that promotes maintainability, scalability, and clear separation of concerns.
-
-```text
-app/
-│
-├── shell/
-│   ├── layout.component.ts
-│   ├── header/
-│   ├── footer/
-│   └── navigation/
-│
-├── core/
-│   ├── api/
-│   ├── guards/
-│   ├── interceptors/
-│   ├── services/
-│   ├── config/
-│   └── state/
-│
-├── shared/
-│   ├── components/
-│   ├── directives/
-│   ├── pipes/
-│   ├── models/
-│   ├── utils/
-│   └── constants/
-│
-├── features/
-│   ├── catalog/
-│   ├── product-details/
-│   ├── favorites/
-│   └── admin/
-│
-├── app.routes.ts
-└── app.config.ts
-```
-
-### Micro-Frontend Readiness
-
-The application is structured around feature boundaries rather than technical layers. Features are independently organized and lazy-loaded where appropriate, making them easier to extract into separate micro-frontends in the future if scaling requirements evolve.
-
-## Getting Started
-
-### Prerequisites
-
-* Node.js (LTS version recommended)
-* npm
-* Angular CLI
-
-### Installation
-
-Clone the repository:
+1. Open a terminal in the project app folder:
 
 ```bash
-git clone <repository-url>
 cd product-explorer
 ```
 
-Install dependencies:
+2. Install dependencies:
 
 ```bash
 npm install
 ```
 
-### Run the Application
+3. Start the app:
 
 ```bash
-ng serve
+npm run start
 ```
 
-Navigate to:
+4. Open in browser:
 
 ```text
-http://localhost:4200
+http://localhost:4200/
 ```
 
-## Running Tests
+## Run Tests
 
-### Unit Tests
+Run all tests once:
 
 ```bash
-ng test
+npm test -- --watch=false
 ```
 
-The project includes unit tests covering:
+Test coverage included in this project:
 
-* Core business logic (filtering and sorting)
-* Product service functionality
-* Product list component rendering and interactions
+- Unit tests for catalog facade business logic
+- Unit tests for product details component behavior
+- Functional integration test for catalog search and details navigation flow
 
-### Functional / E2E Tests
+## Admin Access Note
 
-```bash
-npx playwright test
+- `/admin` is protected by a route guard.
+- If admin access is not enabled, navigation is redirected to `/catalog?denied=admin`.
+- Admin access can be granted from the catalog denied state action or by setting localStorage key `productExplorer.isAdmin` to `true`.
+
+## Final Project Structure
+
+```text
+Angular-Product-Explorer/
+├── README.md
+└── product-explorer/
+	├── angular.json
+	├── package.json
+	├── src/
+	│   ├── main.ts
+	│   └── app/
+	│       ├── app.config.ts
+	│       ├── app.html
+	│       ├── app.routes.ts
+	│       ├── app.scss
+	│       ├── app.ts
+	│       ├── core/
+	│       │   ├── api/
+	│       │   │   └── products.api.ts
+	│       │   ├── guards/
+	│       │   │   └── admin.guard.ts
+	│       │   └── services/
+	│       │       └── favorites.service.ts
+	│       ├── features/
+	│       │   ├── admin/
+	│       │   │   ├── admin.routes.ts
+	│       │   │   └── components/
+	│       │   │       └── view-admin/
+	│       │   │           ├── view-admin.component.html
+	│       │   │           ├── view-admin.component.scss
+	│       │   │           └── view-admin.component.ts
+	│       │   ├── catalog/
+	│       │   │   ├── catalog.routes.ts
+	│       │   │   ├── components/
+	│       │   │   │   └── browse-products/
+	│       │   │   │       ├── browse-products.component.html
+	│       │   │   │       ├── browse-products.component.scss
+	│       │   │   │       ├── browse-products.component.ts
+	│       │   │   │       └── browse-products.functional.spec.ts
+	│       │   │   ├── models/
+	│       │   │   │   └── product.model.ts
+	│       │   │   └── services/
+	│       │   │       ├── catalog.facade.spec.ts
+	│       │   │       └── catalog.facade.ts
+	│       │   ├── favorites/
+	│       │   │   ├── favorites.routes.ts
+	│       │   │   └── components/
+	│       │   │       └── view-favorites/
+	│       │   │           ├── view-favorites.component.html
+	│       │   │           ├── view-favorites.component.scss
+	│       │   │           └── view-favorites.component.ts
+	│       │   └── product-details/
+	│       │       ├── product-details.routes.ts
+	│       │       └── components/
+	│       │           └── view-product-details/
+	│       │               ├── view-product-details.component.html
+	│       │               ├── view-product-details.component.scss
+	│       │               ├── view-product-details.component.spec.ts
+	│       │               └── view-product-details.component.ts
+	│       ├── shared/
+	│       │   ├── constants/
+	│       │   │   └── app.constants.ts
+	│       │   └── services/
+	│       │       └── product-store.service.ts
+	│       └── shell/
+	│           ├── layout.component.html
+	│           ├── layout.component.scss
+	│           ├── layout.component.ts
+	│           ├── header/
+	│           │   ├── header.component.html
+	│           │   ├── header.component.scss
+	│           │   └── header.component.ts
+	│           └── navigation/
+	│               ├── navigation.component.html
+	│               ├── navigation.component.scss
+	│               └── navigation.component.ts
+	└── tsconfig.json
 ```
-
-The project includes a functional test covering a critical user flow:
-
-1. Search for a product
-2. Select a product from the results
-3. Navigate to the product details page
-4. Verify product details are displayed
-
-## Security Considerations
-
-The application includes basic security practices:
-
-* Route protection using an Admin route guard
-* Strong TypeScript typing and strict mode
-* Angular template sanitization for user-facing content
-* No direct DOM manipulation
-* Principle of least privilege applied where appropriate
-
-This project is developed as part of a technical assessment and focuses on demonstrating clean architecture, code quality, testing practices, responsiveness, and modern Angular development techniques.
